@@ -37,6 +37,6 @@ JSON columns to represent core entities **even knowing** that the loss of explic
 cost.
 
  1. It's less work if I don't have to change my schema to add a new field.
- 2. [I can't afford to run a migration to add a new field.][./migration]
+ 2. [I can't afford to run a migration to add a new field.](./migration)
  3. I'm worried about the performance of using joins.
  4. I don't want to have to worry about updating multiple tables.
