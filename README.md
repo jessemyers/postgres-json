@@ -17,7 +17,7 @@ are more likely to encounter bugs caused by production data having a structure y
 
 ## When Should You Use JSON Columns?
 
-In my experience, the drawbacks of JSNOn colums are only justified when both of the following are true:
+In my experience, the drawbacks of JSON colums are only justified when both of the following are true:
 
  1. The level of effort to map your data structure into SQL is high.
  2. Your data structure is isolated to a small area and a small number of people.
@@ -30,13 +30,13 @@ large parts of your application (and, probably, data warehouse) depend on unders
 these structures.
 
 
-## Why Do People Use JSON Columns When They Know They Shouldn't?
+## Why Do People Use JSON Columns For Core Entities Anyway?
 
 What follows are a few arguments (and rebuttals) to some of the common arguments **in favor of**
 JSON columns to represent core entities **even knowing** that the loss of explicitness has a tangible
 cost.
 
- 1. [It's less work if I don't have to change my schema to add a new field.](./new_field)
- 2. [I can't afford to run a migration to add a new field.](./migration)
- 3. I'm worried about the performance of using joins.
+ 1. [It's too much work to change my schema when adding a new field.](./new_field)
+ 2. [It's too slow to run a database migration when adding a new field.](./migration)
+ 3. [It's too slow to query data across multiple tables](./join)
  4. I don't want to have to worry about updating multiple tables.

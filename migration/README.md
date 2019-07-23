@@ -1,7 +1,9 @@
-# Adding New Fields
+# Migrating The Schema To Add New Fields
 
-Adding new null columns to tables in PostgreSQL has always been fast. Since PostgreSQL 11, new
-columns with non-null default values has also been fast.
+Database migrations can be tricky, but out of all the common migrations, adding a new column
+to an existing table is one of the safeest. Adding new null columns to tables in PostgreSQL
+has always been fast. Since PostgreSQL 11, new columns with non-null default values has also
+been fast.
 
 Here's a simple example:
 
