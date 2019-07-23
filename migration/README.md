@@ -2,12 +2,12 @@
 
 Database migrations can be tricky, but out of all the common migrations, adding a new column
 to an existing table is one of the safeest. Adding new null columns to tables in PostgreSQL
-has always been fast. Since PostgreSQL 11, new columns with non-null default values has also
-been fast.
+has always been fast. Since PostgreSQL 11, adding new columns with non-null default values
+has also been fast.
 
 Here's a simple example:
 
- 0. Make sure you're running a new enough PostgreSQL:
+ 0. Make sure you're running a new enough PostgreSQL (>= 11):
 
         > psql --version
         psql (PostgreSQL) 11.4
@@ -38,7 +38,7 @@ Here's a simple example:
 
 Your measurements will vary, but clearly, this is not enough latency to matter much.
 
-Let's do the same thing, but with some simulated load:
+Let's do the same thing, but with some simulated load happening while we apply the change:
 
  A. Install the `parallel` tool:
 
@@ -51,12 +51,12 @@ Let's do the same thing, but with some simulated load:
         CREATE TABLE
         COPY 1000000
 
- C. Generate some concurrent queries in the background:
-
-        > seq 1000 | parallel --jobs 4 "./query.py | psql example | true" &
+ C. Generate some concurrent queries in the background.
 
     This command will run for several (e.g. 5-10) seconds. We want to run the
-    next command while it is still executing...
+    next command while it is still executing:
+
+        > seq 1000 | parallel --jobs 4 "./query.py | psql example | true" &
 
  D. Add a column again (and measure the running time):
 

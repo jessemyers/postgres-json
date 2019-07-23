@@ -1,7 +1,7 @@
 # Defining New Fields
 
-A common approach with JSON columns is to have them represent dictionaries, which in turn
-represent multiple values based on keys:
+A common approach with JSON columns is to have a single column store a dictionary, which in turn
+represents multiple values based on keys:
 
     CREATE TABLE example (
         id int not null,
@@ -16,8 +16,8 @@ represent multiple values based on keys:
      bar | that
     (1 row)
 
-Since the values stored in this dictionary under `foo` and `this` are not part of the database
-schema, we do not have to do **any work** to add a new field `baz`:
+Since the values stored in this dictionary (e.g. under `foo` and `this`) are not part of the
+database schema, we do not have to do **any work** to add a new field `baz`:
 
     UPDATE example
        SET value = jsonb_set(value, '{baz}', '"buzz"')
@@ -29,8 +29,8 @@ schema, we do not have to do **any work** to add a new field `baz`:
      buzz
     (1 row)
 
-It's hard to compete with **zero work**, but since having no schema comes with some other costs
-(e.g. code complexity, lack of explicitness), it's worth quantifying how much work it takes to
+It's hard to compete with **zero work**, but since having going schema-less comes with other kinds
+of costs (e.g. code complexity, lack of explicitness), it's worth quantifying how much work it takes to
 add a new field.
 
 My assumption here is that we're using an ORM of some sort and have something like the following
@@ -71,10 +71,10 @@ data as an opaque dictionary, we can do something like:
              }
 
 That is, we can define a layer of indirection that *automatically* incorporates all
-declared fields into a dictionary for use upstream (and we only need to make this change
-once).
+declared fields into a dictionary for use upstream. We only need to make this change
+once and it has zero marginal cost for new fields once in place.
 
-If, on the other hand, the upstream application software wished to refer direction to
+If, on the other hand, the upstream application software wished to refer directly to
 the field `baz`, we have to write that code. Ultimately such costs are likely to be small
 because the upstream application layers (e.g. API resources and controllers) are likely
 to have the same sort of "add one declartion" extensibility. And if they don't, the likely
@@ -82,4 +82,4 @@ reason is that we require some non-trivial business logic that references the fi
 and would have to write that logic no matter what pattern we used at our database layer.
 
 In other words, while non-zero, the costs of adding a new field as a database column are
-small and bounded in most cases.
+small, predictable, and bounded in most cases.
