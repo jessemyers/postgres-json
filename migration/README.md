@@ -32,7 +32,7 @@ Here's a simple example:
 
         real    0m0.023s
         user    0m0.008s
-        sys	    0m0.010s
+        sys     0m0.010s
 
 Your measurements will vary, but clearly, this is not enough latency to matter much.
 
@@ -63,7 +63,7 @@ Let's do the same thing, but with some simulated load:
 
         real    0m0.033s
         user    0m0.009s
-        sys	    0m0.009s
+        sys     0m0.009s
 
 Contention with ongoing queries introduces a small amount of additional latency, but nothing
 that should matter much nor that indicates that a full table lock is taking place.
