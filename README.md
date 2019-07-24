@@ -28,7 +28,7 @@ In my experience, the drawbacks of JSON colums are only justified when both of t
 Application prototypes can fit these criteria. So too can storage of deeply nested structures used in
 isolated areas of your code base.
 
-On the other hand, an application's **core entities* very rarely are a good choice for JSON columns;
+On the other hand, an application's **core entities** very rarely are a good choice for JSON columns;
 most such objects are easily representable with a relational model and must be understand by large parts
 of your application (and, probably, data warehouse).
 
