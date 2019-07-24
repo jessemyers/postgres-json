@@ -42,4 +42,4 @@ cost.
  1. [I have to write too much code to add a new field.](./new_field)
  2. [I can't afford to migrate the database to add a new field.](./migration)
  3. [I need to avoid joins to get good query performance.](./join)
- 4. I don't want to have to worry about updating multiple tables.
+ 4. [I don't want to have to worry about updating multiple tables.](./update)
